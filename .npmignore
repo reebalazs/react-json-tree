@@ -1,6 +1,6 @@
 .DS_Store
 *.log
-src
+# src
 test
 examples
 coverage
