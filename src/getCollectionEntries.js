@@ -18,6 +18,11 @@ function getEntries(type, collection, sortObjectKeys, from=0, to=Infinity) {
   if (type === 'Object') {
     let keys = Object.getOwnPropertyNames(collection);
 
+    // Filter the collection for non-iterable properties
+    // (which are created by Object.defineProperty with enumerable: false option).
+    // This is needed to hide a seamless-immutable object's internal functions.
+    keys = keys.filter(key => collection.propertyIsEnumerable(key));
+
     if (typeof sortObjectKeys !== 'undefined') {
       keys.sort(sortObjectKeys);
     }
